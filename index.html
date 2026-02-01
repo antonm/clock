@@ -1,158 +1,134 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist Vertical Digital Clock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap');
+
+    :root {
+      --bg-color: #f1f5f9;
+      --text-main: #0f172a;
+      --text-sub: #64748b;
+      --accent: #3b82f6;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-main: #f8fafc;
+        --text-sub: #94a3b8;
+        --accent: #60a5fa;
+        --glass-bg: rgba(30, 41, 59, 0.5);
+        --glass-border: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.5s ease;
+      overflow: hidden;
+    }
+
+    .digital-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 4rem 3.5rem;
+      border-radius: 3.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .time-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+    }
+
+    .unit {
+      font-size: 8rem;
+      font-weight: 800;
+    }
+
+    .unit.seconds {
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    .date-container {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-sub);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      .unit { font-size: 6rem; }
+      .unit.seconds { font-size: 3rem; }
+      .digital-container { padding: 3rem 2rem; }
+    }
   </style>
 </head>
-<body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Minimalist Vertical Digital Clock&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&amp;display=swap');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--bg-color: #f1f5f9;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--text-main: #0f172a;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--text-sub: #64748b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--accent: #3b82f6;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--glass-bg: rgba(255, 255, 255, 0.7);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--glass-border: rgba(255, 255, 255, 0.4);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (prefers-color-scheme: dark) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>--bg-color: #020617;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>--text-main: #f8fafc;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>--text-sub: #94a3b8;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>--accent: #60a5fa;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>--glass-bg: rgba(30, 41, 59, 0.5);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>--glass-border: rgba(255, 255, 255, 0.05);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-color);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-main);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.5s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.digital-container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--glass-bg);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid var(--glass-border);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 4rem 3.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 3.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.time-stack {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 0.85;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.05em;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.unit {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 8rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.unit.seconds {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 4rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 300;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.date-container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-sub);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.25em;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 640px) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.unit {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>font-size: 6rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.unit.seconds {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>font-size: 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.digital-container {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>padding: 3rem 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="flex items-center justify-center min-h-screen"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="digital-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="date-container" id="date-display"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Friday, Jan 16</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="time-stack"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="unit" id="hours"&gt;00&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="unit" id="minutes"&gt;00&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="unit seconds" id="seconds"&gt;00&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const hoursDisplay = document.getElementById('hours');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const minutesDisplay = document.getElementById('minutes');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const secondsDisplay = document.getElementById('seconds');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const dateDisplay = document.getElementById('date-display');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function updateClock() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const now = new Date();</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 24-hour format</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const hours = String(now.getHours()).padStart(2, '0');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const minutes = String(now.getMinutes()).padStart(2, '0');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const seconds = String(now.getSeconds()).padStart(2, '0');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Update DOM</p>
-<p class="p1"><span class="Apple-converted-space">            </span>hoursDisplay.textContent = hours;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>minutesDisplay.textContent = minutes;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>secondsDisplay.textContent = seconds;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const dateOptions = {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>weekday: 'long',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>month: 'short',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>day: 'numeric'</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p1"><span class="Apple-converted-space">            </span>dateDisplay.textContent = now.toLocaleDateString(undefined, dateOptions);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>requestAnimationFrame(updateClock);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Start the clock</p>
-<p class="p1"><span class="Apple-converted-space">        </span>updateClock();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<body class="flex items-center justify-center min-h-screen">
+
+  <div class="digital-container">
+    <div class="date-container" id="date-display">Friday, Jan 16</div>
+
+    <div class="time-stack">
+      <div class="unit" id="hours">00</div>
+      <div class="unit" id="minutes">00</div>
+      <div class="unit seconds" id="seconds">00</div>
+    </div>
+  </div>
+
+  <script>
+    const hoursDisplay = document.getElementById('hours');
+    const minutesDisplay = document.getElementById('minutes');
+    const secondsDisplay = document.getElementById('seconds');
+    const dateDisplay = document.getElementById('date-display');
+
+    function updateClock() {
+      const now = new Date();
+
+      // 24-hour format
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      // Update DOM
+      hoursDisplay.textContent = hours;
+      minutesDisplay.textContent = minutes;
+      secondsDisplay.textContent = seconds;
+
+      const dateOptions = {
+        weekday: 'long',
+        month: 'short',
+        day: 'numeric'
+      };
+      dateDisplay.textContent = now.toLocaleDateString(undefined, dateOptions);
+
+      requestAnimationFrame(updateClock);
+    }
+
+    // Start the clock
+    updateClock();
+  </script>
 </body>
 </html>
